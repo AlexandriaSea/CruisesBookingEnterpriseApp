@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/font-awesome/css/fontawesome.min.css"/>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container" style="background-color: lightblue; padding: 300px; border-radius: 500px">
+    <h2>Welcome to Celebrity Cruises Official Website</h2>
+    <div class="alert alert-primary" role="alert" th:text="${successMessage}" th:if="${successMessage}"></div>
+    <div class="alert alert-danger" role="alert" th:text="${errorMessage}" th:if="${errorMessage}"></div>
+    <br/>
+    <form class="well form-horizontal" action="/login" method="POST">
+        <div class="form-group">
+            <label for="userName" class="form-label">User Name:</label>
+            <input class="form-control" type="email" id="userName" name="userName" required/>
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="password" class="form-label">Password:</label>
+            <input class="form-control" type="password" id="password" name="password" required/>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-primary" style="width: 100px">Login</button>
+        <div class="form-group"><br/>
+            <p>Don't have an account? <a href="/user/registration">Sign Up</a></p>
+        </div>
+    </form>
+</div>
+</div>
+</body>
+</html>
