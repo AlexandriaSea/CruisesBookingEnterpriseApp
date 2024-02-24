@@ -1,13 +1,10 @@
 package com.wenjiezhou.assignment2.models;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+
 
 @Entity
 @Table(name = "passenger")
@@ -15,12 +12,12 @@ public class Passenger {
 
     @Id
     @Column(name = "passengerid")
-    @NotNull(message = "Passenger ID is mandatory")
-    @Positive(message = "Passenger ID must be positive")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int passengerId;
 
     @Column(name = "username")
     @NotBlank(message = "User Name is mandatory")
+    @Email(message = "User Name is email")
     private String userName;
 
     @Column(name = "password")
@@ -52,6 +49,20 @@ public class Passenger {
     private String country;
 
     public Passenger(){}
+
+    public Passenger(String userName, String password, String firstName, String lastName,
+                     String address, String city, String postalCode, String country)
+    {
+        super();
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.country = country;
+    }
 
     public Passenger(int passengerId, String userName, String password, String firstName, String lastName,
                      String address, String city, String postalCode, String country)

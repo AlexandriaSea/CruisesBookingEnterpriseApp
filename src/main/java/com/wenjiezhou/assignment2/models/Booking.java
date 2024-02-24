@@ -1,13 +1,10 @@
 package com.wenjiezhou.assignment2.models;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 
 
 @Entity
@@ -16,39 +13,49 @@ public class Booking {
 
     @Id
     @Column(name = "reservationid")
-    @NotNull(message = "Reservation ID is mandatory")
-    @Positive(message = "Reservation ID must be positive")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationId;
 
-    @Column(name = "passengerid")
-    @NotBlank(message = "Passenger ID is mandatory")
-    private int passengerId;
+    @ManyToOne
+    @JoinColumn(name = "passengerid", referencedColumnName = "passengerid")
+    private Passenger passenger;
 
-    @Column(name = "cruiseid")
-    @NotBlank(message = "Cruise ID is mandatory")
-    private int cruiseId;
+    @ManyToOne
+    @JoinColumn(name = "cruiseid", referencedColumnName = "cruiseid")
+    private Cruise cruise;
 
     @Column(name = "stateroomtype")
     @NotBlank(message = "Stateroom Type is mandatory")
     private String stateroomType;
 
     @Column(name = "totalguest")
-    @NotBlank(message = "Total Guest is mandatory")
+    @Min(1)
     private int totalGuest;
 
     @Column(name = "totalprice")
-    @NotBlank(message = "Total Price is mandatory")
+    @NotNull(message = "Total Price is mandatory")
     private double totalPrice;
 
     public Booking(){}
 
-    public Booking(int reservationId, int passengerId, int cruiseId, String stateroomType,
+    public Booking(Passenger passenger, Cruise cruise, String stateroomType,
+                   int totalGuest, double totalPrice)
+    {
+        super();
+        this.passenger = passenger;
+        this.cruise = cruise;
+        this.stateroomType = stateroomType;
+        this.totalGuest = totalGuest;
+        this.totalPrice = totalPrice;
+    }
+
+    public Booking(int reservationId, Passenger passenger, Cruise cruise, String stateroomType,
                    int totalGuest, double totalPrice)
     {
         super();
         this.reservationId = reservationId;
-        this.passengerId = passengerId;
-        this.cruiseId = cruiseId;
+        this.passenger = passenger;
+        this.cruise = cruise;
         this.stateroomType = stateroomType;
         this.totalGuest = totalGuest;
         this.totalPrice = totalPrice;
@@ -60,22 +67,6 @@ public class Booking {
 
     public void setReservationId(int reservationId) {
         this.reservationId = reservationId;
-    }
-
-    public int getPassengerId() {
-        return passengerId;
-    }
-
-    public void setPassengerId(int passengerId) {
-        this.passengerId = passengerId;
-    }
-
-    public int getCruiseId() {
-        return cruiseId;
-    }
-
-    public void setCruiseId(int cruiseId) {
-        this.cruiseId = cruiseId;
     }
 
     public String getStateroomType() {
@@ -100,5 +91,21 @@ public class Booking {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Passenger getPassenger() {
+        return passenger;
+    }
+
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
+    }
+
+    public Cruise getCruise() {
+        return cruise;
+    }
+
+    public void setCruise(Cruise cruise) {
+        this.cruise = cruise;
     }
 }

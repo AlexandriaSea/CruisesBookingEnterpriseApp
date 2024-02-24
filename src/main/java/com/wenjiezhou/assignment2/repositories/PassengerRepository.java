@@ -7,5 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PassengerRepository extends CrudRepository<Passenger, Integer>{
 
+    Passenger findByUserName(String userName);
     Passenger findByUserNameAndPassword(String userName, String password);
 }

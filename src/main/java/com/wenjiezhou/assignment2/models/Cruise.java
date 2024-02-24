@@ -1,13 +1,9 @@
 package com.wenjiezhou.assignment2.models;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import java.sql.Date;
 
 
@@ -17,8 +13,7 @@ public class Cruise {
 
     @Id
     @Column(name = "cruiseid")
-    @NotNull(message = "Cruise ID is mandatory")
-    @Positive(message = "Cruise ID must be positive")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cruiseId;
 
     @Column(name = "cruisename")
@@ -30,11 +25,11 @@ public class Cruise {
     private String shipName;
 
     @Column(name = "startdate")
-    @NotBlank(message = "Start Date is mandatory")
+    @NotNull(message = "Start Date is mandatory")
     private Date startDate;
 
     @Column(name = "enddate")
-    @NotBlank(message = "End Date is mandatory")
+    @NotNull(message = "End Date is mandatory")
     private Date endDate;
 
     @Column(name = "destination")
@@ -42,6 +37,16 @@ public class Cruise {
     private String destination;
 
     public Cruise(){}
+
+    public Cruise(String cruiseName, String shipName, Date startDate, Date endDate, String destination)
+    {
+        super();
+        this.cruiseName = cruiseName;
+        this.shipName = shipName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.destination = destination;
+    }
 
     public Cruise(int cruiseId, String cruiseName, String shipName, Date startDate, Date endDate, String destination)
     {
