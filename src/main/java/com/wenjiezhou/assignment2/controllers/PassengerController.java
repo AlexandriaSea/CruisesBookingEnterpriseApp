@@ -3,6 +3,7 @@ package com.wenjiezhou.assignment2.controllers;
 
 import com.wenjiezhou.assignment2.models.Passenger;
 import com.wenjiezhou.assignment2.repositories.PassengerRepository;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,5 +46,28 @@ public class PassengerController {
         passRepository.save(passenger);
         redirAttrs.addFlashAttribute("successMessage", "Account has been created successfully.");
         return "redirect:/index";
+    }
+
+    @GetMapping("/user/profile")
+    public String profilePage(Passenger passenger, Model model, HttpSession session)
+    {
+        String userName = (String) session.getAttribute("userName");
+        model.addAttribute("userName", userName);
+        return "/user/profile";
+    }
+
+    @GetMapping("/user/history")
+    public String historyPage(Passenger passenger, Model model, HttpSession session)
+    {
+        String userName = (String) session.getAttribute("userName");
+        model.addAttribute("userName", userName);
+        return "/user/history";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session)
+    {
+        session.invalidate();
+        return "redirect:/";
     }
 }

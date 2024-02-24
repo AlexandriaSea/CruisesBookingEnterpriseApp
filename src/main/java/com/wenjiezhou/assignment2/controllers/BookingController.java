@@ -30,8 +30,10 @@ public class BookingController {
     private CruiseRepository cruiseRepository;
 
     @GetMapping("/cruise/booking")
-    public String bookingPage(Booking booking, Model model)
+    public String bookingPage(Booking booking, Model model, HttpSession session)
     {
+        String userName = (String) session.getAttribute("userName");
+        model.addAttribute("userName", userName);
         model.addAttribute("cruises", cruiseRepository.findAll());
         return "cruise/booking";
     }

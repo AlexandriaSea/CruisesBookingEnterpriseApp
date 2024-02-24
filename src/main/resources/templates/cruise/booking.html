@@ -9,6 +9,33 @@
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <span class="navbar-brand" th:text="${userName}"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user/profile}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user/history}">Booking History</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/cruise/booking}">Book a Cruise</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div class="container" style="background-color: darkseagreen; padding: 300px; border-radius: 500px">
     <h2>Welcome to booking page</h2>
     <div class="alert alert-primary" role="alert" th:text="${successMessage}" th:if="${successMessage}"></div>

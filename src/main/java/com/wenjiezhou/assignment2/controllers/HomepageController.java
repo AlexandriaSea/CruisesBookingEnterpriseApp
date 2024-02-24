@@ -33,6 +33,7 @@ public class HomepageController {
         if(registeredPassenger != null)
         {
             session.setAttribute("passengerId", registeredPassenger.getPassengerId());
+            session.setAttribute("userName", userName);
             redirAttrs.addFlashAttribute("successMessage", "Login successful.");
             return "redirect:cruise/booking";
         }
