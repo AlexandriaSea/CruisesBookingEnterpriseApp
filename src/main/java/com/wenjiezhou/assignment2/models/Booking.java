@@ -20,10 +20,12 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reservationId;
 
+    // Link to passenger table using foreign key of passengerId
     @ManyToOne
     @JoinColumn(name = "passengerid", referencedColumnName = "passengerid")
     private Passenger passenger;
 
+    // Link to cruise table using foreign key of cruiseId
     @ManyToOne
     @JoinColumn(name = "cruiseid", referencedColumnName = "cruiseid")
     private Cruise cruise;

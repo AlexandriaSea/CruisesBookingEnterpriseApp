@@ -8,5 +8,6 @@ Submission Date: Mar 13, 2024
 
 public class CruiseController {
 
-    // Leave for future features
+    // Leave for future functions such as addition and modification of cruise info
+    // Should be accessed by administrator role account
 }

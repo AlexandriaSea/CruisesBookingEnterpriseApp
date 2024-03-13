@@ -24,6 +24,7 @@ Submission Date: Mar 13, 2024
 @Controller
 public class BookingController {
 
+    // Link three repositories
     @Autowired
     private BookingRepository bookRepository;
 
@@ -33,6 +34,7 @@ public class BookingController {
     @Autowired
     private CruiseRepository cruiseRepository;
 
+    // Get to booking page
     @GetMapping("/cruise/booking")
     public String bookingPage(Booking booking, Model model, HttpSession session) {
         String userName = (String) session.getAttribute("userName");
@@ -41,21 +43,22 @@ public class BookingController {
         return "cruise/booking";
     }
 
+    // Post to booking page and save a valid booking into database
     @PostMapping("/cruise/booking")
     public String bookCruise(@Valid Booking booking, BindingResult result, Model model, RedirectAttributes redirAttrs,
                              HttpSession session, @RequestParam("selectedCruiseId") int cruiseId) {
-        Integer passengerId = (Integer) session.getAttribute("passengerId");
-        System.out.println(passengerId);
-
         if (result.hasErrors()) {
             redirAttrs.addFlashAttribute("errorMessage", "Invalid booking details.");
             return "redirect:/cruise/booking";
         }
 
         try {
+            // Find and set passenger based on ID from session
+            Integer passengerId = (Integer) session.getAttribute("passengerId");
             Passenger registeredPassenger = passRepository.findById(passengerId).orElse(null);
             booking.setPassenger(registeredPassenger);
 
+            // Find and set cruise based on ID from request param
             Cruise selectedCruise = cruiseRepository.findById(cruiseId).orElse(null);
             booking.setCruise(selectedCruise);
 
@@ -71,6 +74,7 @@ public class BookingController {
         }
     }
 
+    // Get to checkout page
     @GetMapping("/cruise/checkout")
     public String checkoutPage(Booking booking, Model model, HttpSession session) {
         Integer reservationId = (Integer) session.getAttribute("reservationId");
@@ -82,6 +86,7 @@ public class BookingController {
         return "cruise/checkout";
     }
 
+    // Post to confirmation page, ignore form data, and simply display successful message
     @PostMapping("/cruise/confirmation")
     public String confirmationPage(Booking booking, Model model, HttpSession session) {
         Integer reservationId = (Integer) session.getAttribute("reservationId");
@@ -90,6 +95,7 @@ public class BookingController {
         return "cruise/confirmation";
     }
 
+    // Get to modify page and add necessary attributes into model based on path variables from URL and ID from session
     @GetMapping("/cruise/modify/{reservationId}/{cruiseId}")
     public String modifyPage(@PathVariable("reservationId") int reservationId, @PathVariable("cruiseId") int cruiseId,
                              Booking booking, Model model, HttpSession session) {
@@ -102,6 +108,7 @@ public class BookingController {
         return "cruise/modify";
     }
 
+    // Post to modify page and save modified booking into database
     @PostMapping("/cruise/modify")
     public String modifyBooking(@Valid Booking modifiedBooking, BindingResult result, Model model,
                                 RedirectAttributes redirAttrs,
@@ -113,9 +120,11 @@ public class BookingController {
         }
 
         try {
+            // Find and set passenger based on ID from request param
             Passenger passenger = passRepository.findById(passengerId).orElse(null);
             modifiedBooking.setPassenger(passenger);
 
+            // Find and set cruise based on ID from request param
             Cruise cruise = cruiseRepository.findById(cruiseId).orElse(null);
             modifiedBooking.setCruise(cruise);
 

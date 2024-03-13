@@ -16,6 +16,7 @@ Submission Date: Mar 13, 2024
 </head>
 <body>
 
+<!-- Display the selected booking info, allow user to modify room type and guest number, and submit modification -->
 <div class="container" style="background-color: lightgrey; padding: 300px; border-radius: 500px">
     <h2>Modify your booking</h2>
     <div class="alert alert-primary" role="alert" th:text="${successMessage}" th:if="${successMessage}"></div>
@@ -44,6 +45,9 @@ Submission Date: Mar 13, 2024
                     required>
                 <option th:selected="${booking.stateroomType == 'Standard'}">Standard</option>
                 <option th:selected="${booking.stateroomType == 'Deluxe'}">Deluxe</option>
+                <option th:selected="${booking.stateroomType == 'Ocean view'}">Ocean view</option>
+                <option th:selected="${booking.stateroomType == 'Sky Suite'}">Sky Suite</option>
+                <option th:selected="${booking.stateroomType == 'Royal Suite'}">Royal Suite</option>
             </select>
         </div>
         <br/>
@@ -62,10 +66,10 @@ Submission Date: Mar 13, 2024
         <button type="submit" class="btn btn-primary" style="width: 200px">Update</button>
         <button type="reset" class="btn btn-secondary" style="width: 200px">Reset</button>
         <a type="button" class="btn btn-light" th:href="@{/user/history}" style="width: 200px">Return</a>
-
     </form>
 </div>
 
+<!-- Automatically calculate and display total price based on user inputs -->
 <script>
     function showPrice() {
         var stateroomType = document.getElementById("stateroomType").value;
@@ -79,6 +83,15 @@ Submission Date: Mar 13, 2024
                 break;
             case "Deluxe":
                 roomPrice = 4000.00;
+                break;
+            case "Ocean view":
+                roomPrice = 6000.00;
+                break;
+            case "Sky Suite":
+                roomPrice = 8000.00;
+                break;
+            case "Royal Suite":
+                roomPrice = 10000.00;
                 break;
             default:
                 roomPrice = 0.00;

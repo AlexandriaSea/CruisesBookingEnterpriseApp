@@ -16,6 +16,7 @@ Submission Date: Mar 13, 2024
 </head>
 <body>
 
+<!-- Navigate among pages -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <span class="navbar-brand" th:text="${userName}"></span>
@@ -32,17 +33,18 @@ Submission Date: Mar 13, 2024
                     <a class="nav-link" th:href="@{/user/profile}">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/history}">Booking History</a>
+                    <a class="nav-link" th:href="@{/user/history}">History</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/cruise/booking}">Book a Cruise</a>
+                    <a class="nav-link" th:href="@{/cruise/booking}">Booking</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="container" style="background-color: yellowgreen; padding: 300px; border-radius: 500px">
+<!-- Display user profile and allow user to make modification -->
+<div class="container" style="background-color: khaki; padding: 300px; border-radius: 500px">
     <h2>Update your profile</h2>
     <div class="alert alert-primary" role="alert" th:text="${successMessage}" th:if="${successMessage}"></div>
     <div class="alert alert-danger" role="alert" th:text="${errorMessage}" th:if="${errorMessage}"></div>

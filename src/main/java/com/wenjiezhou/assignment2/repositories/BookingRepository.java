@@ -11,5 +11,7 @@ Submission Date: Mar 13, 2024
 */
 
 public interface BookingRepository extends CrudRepository<Booking, Integer> {
+
+    // Find all bookings based on passenger ID for history page
     List<Booking> findAllByPassengerPassengerId(Integer passengerId);
 }

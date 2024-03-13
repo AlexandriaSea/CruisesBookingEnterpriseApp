@@ -16,6 +16,7 @@ Submission Date: Mar 13, 2024
 </head>
 <body>
 
+<!-- Navigate among pages -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <span class="navbar-brand" th:text="${userName}"></span>
@@ -32,16 +33,17 @@ Submission Date: Mar 13, 2024
                     <a class="nav-link" th:href="@{/user/profile}">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/history}">Booking History</a>
+                    <a class="nav-link" th:href="@{/user/history}">History</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/cruise/booking}">Book a Cruise</a>
+                    <a class="nav-link" th:href="@{/cruise/booking}">Booking</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
+<!-- Display all cruises in table, allow user to select room type and input guest number, and submit booking -->
 <div class="container" style="background-color: darkseagreen; padding: 300px; border-radius: 500px">
     <h2>Welcome to booking page</h2>
     <div class="alert alert-primary" role="alert" th:text="${successMessage}" th:if="${successMessage}"></div>
@@ -73,20 +75,20 @@ Submission Date: Mar 13, 2024
             </tr>
             </tbody>
         </table>
-
         <h2>Select Stateroom Type</h2>
         <div>
             <select id="stateroomType" name="stateroomType" class="form-select" onchange="showPrice()" required>
                 <option>Standard</option>
                 <option>Deluxe</option>
+                <option>Ocean view</option>
+                <option>Sky Suite</option>
+                <option>Royal Suite</option>
             </select>
         </div>
-
         <h2>Number of Guest</h2>
         <div>
             <input type="number" id="totalGuest" name="totalGuest" min="1" onchange="showPrice()" required>
         </div>
-
         <h2>Total Price</h2>
         <div>
             <input type="number" id="totalPrice" name="totalPrice" readonly>
@@ -96,6 +98,7 @@ Submission Date: Mar 13, 2024
     </form>
 </div>
 
+<!-- Automatically calculate and display total price based on user inputs -->
 <script>
     function showPrice() {
         var stateroomType = document.getElementById("stateroomType").value;
@@ -109,6 +112,15 @@ Submission Date: Mar 13, 2024
                 break;
             case "Deluxe":
                 roomPrice = 4000.00;
+                break;
+            case "Ocean view":
+                roomPrice = 6000.00;
+                break;
+            case "Sky Suite":
+                roomPrice = 8000.00;
+                break;
+            case "Royal Suite":
+                roomPrice = 10000.00;
                 break;
             default:
                 roomPrice = 0.00;

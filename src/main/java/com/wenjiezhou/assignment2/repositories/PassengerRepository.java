@@ -11,7 +11,9 @@ Submission Date: Mar 13, 2024
 
 public interface PassengerRepository extends CrudRepository<Passenger, Integer> {
 
+    // Find passenger by userName in registration process
     Passenger findByUserName(String userName);
 
+    // Find passenger by userName and password in login process
     Passenger findByUserNameAndPassword(String userName, String password);
 }

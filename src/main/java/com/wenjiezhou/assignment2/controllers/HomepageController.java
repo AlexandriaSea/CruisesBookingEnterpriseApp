@@ -18,14 +18,18 @@ Submission Date: Mar 13, 2024
 @Controller
 public class HomepageController {
 
+    // Link to passenger repository
     @Autowired
     private PassengerRepository passRepository;
 
+    // Request the homepage
     @RequestMapping("/")
     public String homePage() {
         return "index";
     }
 
+    // Post to homepage, search passenger in database based on userName and password from request param
+    // Redirect user to next page if the simple authentication is successful
     @PostMapping("/index")
     public String login(@RequestParam("userName") String userName,
                         @RequestParam("password") String password,

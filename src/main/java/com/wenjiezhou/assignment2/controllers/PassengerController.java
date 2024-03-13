@@ -24,27 +24,28 @@ Submission Date: Mar 13, 2024
 @Controller
 public class PassengerController {
 
+    // Link to two repositories
     @Autowired
     private PassengerRepository passRepository;
 
     @Autowired
     private BookingRepository bookRepository;
 
+    // Get to registration page
     @GetMapping("/user/registration")
     public String registrationPage(Passenger passenger) {
         return "user/registration";
     }
 
+    // Post to registration page and save a valid passenger into database if the userName has not been used
     @PostMapping("/user/registration")
     public String registerNewPassenger(@Valid Passenger passenger, BindingResult result, Model model, RedirectAttributes redirAttrs) {
-        Passenger registeredPassenger = passRepository.findByUserName(
-                passenger.getUserName());
-
         if (result.hasErrors()) {
             model.addAttribute("errorMessage", "some fields validation failed.");
             return "user/registration";
         }
 
+        Passenger registeredPassenger = passRepository.findByUserName(passenger.getUserName());
         if (registeredPassenger != null) {
             model.addAttribute("errorMessage", "Email has been used.");
             return "user/registration";
@@ -52,9 +53,10 @@ public class PassengerController {
 
         passRepository.save(passenger);
         redirAttrs.addFlashAttribute("successMessage", "Account has been created successfully.");
-        return "redirect:/index";
+        return "redirect:/";
     }
 
+    // Get to profile page, find passenger based on ID from session, and add passenger into model
     @GetMapping("/user/profile")
     public String profilePage(Passenger passenger, Model model, HttpSession session) {
         Integer passengerId = (Integer) session.getAttribute("passengerId");
@@ -67,6 +69,7 @@ public class PassengerController {
         return "user/profile";
     }
 
+    // Post to profile page and saved updated passenger into database
     @PostMapping("/user/profile")
     public String updateProfile(@Valid Passenger updatedPassenger, BindingResult result, Model model, RedirectAttributes redirAttrs) {
         if (result.hasErrors()) {
@@ -79,6 +82,8 @@ public class PassengerController {
         return "redirect:/user/profile";
     }
 
+    // Get to history page, find all bookings based on passenger ID from session,
+    // and add bookings and current date into model
     @GetMapping("/user/history")
     public String historyPage(Booking booking, Model model, HttpSession session) {
         Integer passengerId = (Integer) session.getAttribute("passengerId");
@@ -91,6 +96,7 @@ public class PassengerController {
         return "user/history";
     }
 
+    // Post to cancel a booking based on reservation ID from path variable from URL
     @PostMapping("/cancel/{reservationId}")
     public String cancelBooking(@PathVariable("reservationId") int reservationId, RedirectAttributes redirAttrs) {
         bookRepository.deleteById(reservationId);
@@ -98,7 +104,7 @@ public class PassengerController {
         return "redirect:/user/history";
     }
 
-
+    // Get to log out user session and return to homepage
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();

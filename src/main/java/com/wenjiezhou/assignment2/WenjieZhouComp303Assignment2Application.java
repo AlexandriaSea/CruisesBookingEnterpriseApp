@@ -13,7 +13,6 @@ Submission Date: Mar 13, 2024
 public class WenjieZhouComp303Assignment2Application {
 
     public static void main(String[] args) {
-
         SpringApplication.run(WenjieZhouComp303Assignment2Application.class, args);
         System.out.println("App is running!");
     }
