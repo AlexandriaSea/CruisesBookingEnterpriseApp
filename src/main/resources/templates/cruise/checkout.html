@@ -1,3 +1,9 @@
+<!--
+Student Name: Wenjie Zhou
+Student Number: 301337168
+Submission Date: Mar 13, 2024
+-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -9,6 +15,44 @@
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<div class="container" style="background-color: peachpuff; padding: 300px; border-radius: 500px">
+    <h2>Please provide your payment method</h2>
+    <br/>
+    <h4>We only accept Credit Card payment</h4>
+    <br/>
+    <form class="well form-horizontal" action="/cruise/confirmation" method="post">
+        <div class="form-group">
+            <label>Reservation ID: </label>
+            <span th:text="${reservationId}"></span>
+        </div>
+        <div class="form-group">
+            <label>Total Price: </label>
+            <span th:text="${totalPrice}"></span>
+        </div>
+        <br/>
+        <div class="form-group">
+            <label>Credit Card Number:</label>
+            <input class="form-control" type="text" id="cardNumber" name="cardNumber"
+                   maxlength="16" minlength="16" required/>
+        </div>
+        <div class="form-group">
+            <label>Expiry Date (MMYY):</label>
+            <input class="form-control" type="text" id="expiryDate" name="expiryDate"
+                   maxlength="4" minlength="4" required/>
+        </div>
+        <div class="form-group">
+            <label>CVV:</label>
+            <input class="form-control" type="password" id="cvv" name="cvv"
+                   maxlength="4" minlength="3" required/>
+        </div>
+        <div class="form-group">
+            <label>Cardholder Name:</label>
+            <input class="form-control" type="text" id="cardholderName" name="cardholderName" required/>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-primary" style="width: 200px">Submit payment</button>
+        <a href="/cruise/booking" class="btn btn-secondary" style="width: 200px">Back to Booking page</a>
+    </form>
+</div>
 </body>
 </html>

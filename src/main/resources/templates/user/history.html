@@ -1,3 +1,9 @@
+<!--
+Student Name: Wenjie Zhou
+Student Number: 301337168
+Submission Date: Mar 13, 2024
+-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -36,6 +42,51 @@
     </div>
 </nav>
 
+<div class="container" style="background-color: mediumpurple; padding: 300px; border-radius: 500px">
+    <h2>Your booking history</h2>
+    <div class="alert alert-primary" role="alert" th:text="${successMessage}" th:if="${successMessage}"></div>
+    <div class="alert alert-danger" role="alert" th:text="${errorMessage}" th:if="${errorMessage}"></div>
+    <br/>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Reservation ID</th>
+            <th>Cruise ID</th>
+            <th>Cruise Name</th>
+            <th>Ship Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Stateroom Type</th>
+            <th>Total Guest</th>
+            <th>Total Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="booking:${bookings}">
+            <td th:text="${booking.reservationId}">Reservation ID</td>
+            <td th:text="${booking.getCruise().cruiseId}">Cruise ID</td>
+            <td th:text="${booking.getCruise().cruiseName}">Cruise Name</td>
+            <td th:text="${booking.getCruise().shipName}">Ship Name</td>
+            <td th:text="${#dates.format(booking.getCruise().startDate, 'yyyy/MM/dd')}">Start Date</td>
+            <td th:text="${#dates.format(booking.getCruise().endDate, 'yyyy/MM/dd')}">End Date</td>
+            <td th:text="${booking.stateroomType}">Stateroom Type</td>
+            <td th:text="${booking.totalGuest}">Total Guest</td>
+            <td th:text="${booking.totalPrice}">Total Price</td>
+            <td>
+                <a th:if="${(booking.getCruise().startDate.time - currentDate.time) >= (1 * 24 * 60 * 60 * 1000)}"
+                   th:href="@{/cruise/modify/{reservationId}/{cruiseId}(reservationId=${booking.reservationId},
+                   cruiseId=${booking.getCruise().cruiseId})}"
+                   type="button" class="btn btn-primary w-100">Modify</a>
+                <form th:if="${(booking.getCruise().startDate.time - currentDate.time) >= (7 * 24 * 60 * 60 * 1000)}"
+                      th:action="@{/cancel/{reservationId}(reservationId=${booking.reservationId})}" method="post">
+                    <button type="submit" class="btn btn-secondary w-100">Cancel</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

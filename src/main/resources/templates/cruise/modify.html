@@ -1,0 +1,91 @@
+<!--
+Student Name: Wenjie Zhou
+Student Number: 301337168
+Submission Date: Mar 13, 2024
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modify Page</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/font-awesome/css/fontawesome.min.css"/>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container" style="background-color: lightgrey; padding: 300px; border-radius: 500px">
+    <h2>Modify your booking</h2>
+    <div class="alert alert-primary" role="alert" th:text="${successMessage}" th:if="${successMessage}"></div>
+    <div class="alert alert-danger" role="alert" th:text="${errorMessage}" th:if="${errorMessage}"></div>
+    <br/>
+    <form class="well form-horizontal" action="/cruise/modify" method="post">
+        <div class="form-group">
+            <label for="reservationId" class="form-label">Reservation ID:</label>
+            <input class="form-control" type="number" id="reservationId" name="reservationId"
+                   th:field="${booking.reservationId}" readonly/>
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="passengerId" class="form-label">Passenger Id:</label>
+            <input class="form-control" type="number" id="passengerId" name="passengerId" th:value="${passengerId}"
+                   readonly/>
+        </div>
+        <div class="form-group">
+            <label for="cruiseId" class="form-label">Cruise ID:</label>
+            <input class="form-control" type="number" id="cruiseId" name="cruiseId" th:value="${cruiseId}" readonly/>
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="stateroomType" class="form-label">Stateroom Type:</label>
+            <select id="stateroomType" name="stateroomType" class="form-control form-select" onchange="showPrice()"
+                    required>
+                <option th:selected="${booking.stateroomType == 'Standard'}">Standard</option>
+                <option th:selected="${booking.stateroomType == 'Deluxe'}">Deluxe</option>
+            </select>
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="totalGuest" class="form-label">Total Guest:</label>
+            <input class="form-control" type="number" id="totalGuest" name="totalGuest" min="1" onchange="showPrice()"
+                   th:field="${booking.totalGuest}" required/>
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="totalPrice" class="form-label">Total Price:</label>
+            <input class="form-control" type="number" id="totalPrice" name="totalPrice" th:field="${booking.totalPrice}"
+                   readonly/>
+        </div>
+        <br/>
+        <button type="submit" class="btn btn-primary" style="width: 200px">Update</button>
+        <button type="reset" class="btn btn-secondary" style="width: 200px">Reset</button>
+        <a type="button" class="btn btn-light" th:href="@{/user/history}" style="width: 200px">Return</a>
+
+    </form>
+</div>
+
+<script>
+    function showPrice() {
+        var stateroomType = document.getElementById("stateroomType").value;
+        var guestNumber = document.getElementById("totalGuest").value;
+        var priceInput = document.getElementById("totalPrice");
+
+        var roomPrice;
+        switch (stateroomType) {
+            case "Standard":
+                roomPrice = 2000.00;
+                break;
+            case "Deluxe":
+                roomPrice = 4000.00;
+                break;
+            default:
+                roomPrice = 0.00;
+        }
+        priceInput.value = roomPrice * guestNumber;
+    }
+</script>
+
+</body>
+</html>

@@ -1,3 +1,9 @@
+<!--
+Student Name: Wenjie Zhou
+Student Number: 301337168
+Submission Date: Mar 13, 2024
+-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -63,7 +69,7 @@
                 <td th:text="${#dates.format(cruise.startDate, 'yyyy/MM/dd')}">Start Date</td>
                 <td th:text="${#dates.format(cruise.endDate, 'yyyy/MM/dd')}">End Date</td>
                 <td th:text="${cruise.destination}">Destination</td>
-                <td><input type="radio" th:name="selectedCruiseId" th:value="${cruise.cruiseId}" /> </td>
+                <td><input type="radio" th:name="selectedCruiseId" th:value="${cruise.cruiseId}"/></td>
             </tr>
             </tbody>
         </table>
@@ -110,5 +116,6 @@
         priceInput.value = roomPrice * guestNumber;
     }
 </script>
+
 </body>
 </html>

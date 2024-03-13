@@ -1,11 +1,15 @@
 package com.wenjiezhou.assignment2.models;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+/*
+Student Name: Wenjie Zhou
+Student Number: 301337168
+Submission Date: Mar 13, 2024
+*/
 
 @Entity
 @Table(name = "booking")
@@ -36,11 +40,11 @@ public class Booking {
     @NotNull(message = "Total Price is mandatory")
     private double totalPrice;
 
-    public Booking(){}
+    public Booking() {
+    }
 
     public Booking(Passenger passenger, Cruise cruise, String stateroomType,
-                   int totalGuest, double totalPrice)
-    {
+                   int totalGuest, double totalPrice) {
         super();
         this.passenger = passenger;
         this.cruise = cruise;
@@ -50,8 +54,7 @@ public class Booking {
     }
 
     public Booking(int reservationId, Passenger passenger, Cruise cruise, String stateroomType,
-                   int totalGuest, double totalPrice)
-    {
+                   int totalGuest, double totalPrice) {
         super();
         this.reservationId = reservationId;
         this.passenger = passenger;

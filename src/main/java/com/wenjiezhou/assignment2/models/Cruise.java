@@ -1,11 +1,16 @@
 package com.wenjiezhou.assignment2.models;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
 import java.sql.Date;
 
+/*
+Student Name: Wenjie Zhou
+Student Number: 301337168
+Submission Date: Mar 13, 2024
+*/
 
 @Entity
 @Table(name = "cruise")
@@ -36,10 +41,10 @@ public class Cruise {
     @NotBlank(message = "Destination is mandatory")
     private String destination;
 
-    public Cruise(){}
+    public Cruise() {
+    }
 
-    public Cruise(String cruiseName, String shipName, Date startDate, Date endDate, String destination)
-    {
+    public Cruise(String cruiseName, String shipName, Date startDate, Date endDate, String destination) {
         super();
         this.cruiseName = cruiseName;
         this.shipName = shipName;
@@ -48,8 +53,7 @@ public class Cruise {
         this.destination = destination;
     }
 
-    public Cruise(int cruiseId, String cruiseName, String shipName, Date startDate, Date endDate, String destination)
-    {
+    public Cruise(int cruiseId, String cruiseName, String shipName, Date startDate, Date endDate, String destination) {
         super();
         this.cruiseId = cruiseId;
         this.cruiseName = cruiseName;

@@ -1,10 +1,14 @@
 package com.wenjiezhou.assignment2.models;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+/*
+Student Name: Wenjie Zhou
+Student Number: 301337168
+Submission Date: Mar 13, 2024
+*/
 
 @Entity
 @Table(name = "passenger")
@@ -48,11 +52,11 @@ public class Passenger {
     @NotBlank(message = "Country is mandatory")
     private String country;
 
-    public Passenger(){}
+    public Passenger() {
+    }
 
     public Passenger(String userName, String password, String firstName, String lastName,
-                     String address, String city, String postalCode, String country)
-    {
+                     String address, String city, String postalCode, String country) {
         super();
         this.userName = userName;
         this.password = password;
@@ -65,8 +69,7 @@ public class Passenger {
     }
 
     public Passenger(int passengerId, String userName, String password, String firstName, String lastName,
-                     String address, String city, String postalCode, String country)
-    {
+                     String address, String city, String postalCode, String country) {
         super();
         this.passengerId = passengerId;
         this.userName = userName;

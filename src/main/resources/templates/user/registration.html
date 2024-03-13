@@ -1,3 +1,9 @@
+<!--
+Student Name: Wenjie Zhou
+Student Number: 301337168
+Submission Date: Mar 13, 2024
+-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -17,28 +23,32 @@
     <form class="well form-horizontal" action="/user/registration" method="post" th:object="${passenger}">
         <div class="form-group">
             <label for="userName" class="form-label">User Name:</label>
-            <input class="form-control" type="email" th:classappend="${#fields.hasErrors('userName') ? 'is-invalid' : ''}"
+            <input class="form-control" type="email"
+                   th:classappend="${#fields.hasErrors('userName') ? 'is-invalid' : ''}"
                    id="userName" name="userName" th:field="*{userName}" required/>
             <span class="invalid-feedback" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></span>
         </div>
         <br/>
         <div class="form-group">
             <label for="password" class="form-label">Password:</label>
-            <input class="form-control" type="password" th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+            <input class="form-control" type="password"
+                   th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
                    id="password" name="password" th:field="*{password}" required/>
             <span class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
         </div>
         <br/>
         <div class="form-group">
             <label for="firstName" class="form-label">First Name:</label>
-            <input class="form-control" type="text" th:classappend="${#fields.hasErrors('firstName') ? 'is-invalid' : ''}"
+            <input class="form-control" type="text"
+                   th:classappend="${#fields.hasErrors('firstName') ? 'is-invalid' : ''}"
                    id="firstName" name="firstName" th:field="*{firstName}" required/>
             <span class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
         </div>
         <br/>
         <div class="form-group">
             <label for="lastName" class="form-label">Last Name:</label>
-            <input class="form-control" type="text" th:classappend="${#fields.hasErrors('lastName') ? 'is-invalid' : ''}"
+            <input class="form-control" type="text"
+                   th:classappend="${#fields.hasErrors('lastName') ? 'is-invalid' : ''}"
                    id="lastName" name="lastName" th:field="*{lastName}" required/>
             <span class="invalid-feedback" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
         </div>
@@ -59,7 +69,8 @@
         <br/>
         <div class="form-group">
             <label for="postalCode" class="form-label">Postal Code:</label>
-            <input class="form-control" type="text" th:classappend="${#fields.hasErrors('postalCode') ? 'is-invalid' : ''}"
+            <input class="form-control" type="text"
+                   th:classappend="${#fields.hasErrors('postalCode') ? 'is-invalid' : ''}"
                    id="postalCode" name="postalCode" th:field="*{postalCode}" required/>
             <span class="invalid-feedback" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
         </div>
